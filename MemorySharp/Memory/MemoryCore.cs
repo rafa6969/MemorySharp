@@ -1,5 +1,5 @@
 ﻿/*
- * MemorySharp Library v1.0.0
+ * MemorySharp Library
  * http://www.binarysharp.com/
  *
  * Copyright (C) 2012-2013 Jämes Ménétrey (a.k.a. ZenLulz).
@@ -150,10 +150,10 @@ namespace Binarysharp.MemoryManagement.Memory
             
             // Allocate the buffer
             var buffer = new byte[size];
-            int nbBytesRead;
+            IntPtr nbBytesRead;
 
             // Read the data from the target process
-            if (NativeMethods.ReadProcessMemory(processHandle, address, buffer, size, out nbBytesRead) && size == nbBytesRead)
+            if (NativeMethods.ReadProcessMemory(processHandle, address, buffer, size, out nbBytesRead) && size == nbBytesRead.ToInt64())
                 return buffer;
 
             // Else the data couldn't be read, throws an exception
@@ -268,14 +268,14 @@ namespace Binarysharp.MemoryManagement.Memory
             HandleManipulator.ValidateAsArgument(address, "address");
 
             // Create the variable storing the number of bytes written
-            int nbBytesWritten;
+            IntPtr nbBytesWritten;
 
             // Write the data to the target process
             if (NativeMethods.WriteProcessMemory(processHandle, address, byteArray, byteArray.Length, out nbBytesWritten))
             {
                 // Check whether the length of the data written is equal to the inital array
-                if (nbBytesWritten == byteArray.Length)
-                    return nbBytesWritten;
+                if (nbBytesWritten.ToInt64() == byteArray.Length)
+                    return byteArray.Length;
             }
 
             // Else the data couldn't be written, throws an exception

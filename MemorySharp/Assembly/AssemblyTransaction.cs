@@ -1,5 +1,5 @@
 ﻿/*
- * MemorySharp Library v1.0.0
+ * MemorySharp Library
  * http://www.binarysharp.com/
  *
  * Copyright (C) 2012-2013 Jämes Ménétrey (a.k.a. ZenLulz).

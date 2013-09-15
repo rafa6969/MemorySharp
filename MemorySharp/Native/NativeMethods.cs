@@ -1,5 +1,5 @@
 ﻿/*
- * MemorySharp Library v1.0.0
+ * MemorySharp Library
  * http://www.binarysharp.com/
  *
  * Copyright (C) 2012-2013 Jämes Ménétrey (a.k.a. ZenLulz).
@@ -526,7 +526,7 @@ namespace Binarysharp.MemoryManagement.Native
         /// </returns>
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool ReadProcessMemory(SafeMemoryHandle hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
+        public static extern bool ReadProcessMemory(SafeMemoryHandle hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);
         #endregion
 
         #region ResumeThread
@@ -862,7 +862,7 @@ namespace Binarysharp.MemoryManagement.Native
         /// </returns>
         [DllImport("kernel32.dll",SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WriteProcessMemory(SafeMemoryHandle hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out int lpNumberOfBytesWritten);
+        public static extern bool WriteProcessMemory(SafeMemoryHandle hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out IntPtr lpNumberOfBytesWritten);
         #endregion
     }
 
