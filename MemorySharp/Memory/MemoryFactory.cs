@@ -47,6 +47,7 @@ namespace Binarysharp.MemoryManagement.Memory
         /// </summary>
         public IEnumerable<RemoteRegion> Regions
         {
+            // TODO: Old 64-bit check
             get
             {
 #if x64
@@ -54,7 +55,7 @@ namespace Binarysharp.MemoryManagement.Memory
 #else
                 var adresseTo = new IntPtr(0x7fffffff);
 #endif
-                return MemoryCore.Query(MemorySharp.Handle, IntPtr.Zero, adresseTo).Select(page => new RemoteRegion(MemorySharp, page.BaseAddress));
+                return MemorySharp.NativeDriver.MemoryCore.QueryInformationMemory(MemorySharp.Handle, IntPtr.Zero, adresseTo).Select(page => new RemoteRegion(MemorySharp, page.BaseAddress));
             }
         }
         #endregion

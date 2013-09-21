@@ -24,8 +24,8 @@ namespace MemorySharpTests.Memory
         public void Equality()
         {
             // Arrange
-            var notepad = Resources.MemorySharp;
-            var own = new MemorySharp(Resources.ProcessSelf);
+            var notepad = Resources.MemorySharp32Bit;
+            var own = new MemorySharp(Resources.CurrentProcess);
 
             // Act
             var ptr1 = notepad[IntPtr.Zero];
@@ -44,7 +44,7 @@ namespace MemorySharpTests.Memory
         public void ChangeProtection()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             // Allocate a chunk of memory for testing purpose
@@ -100,7 +100,7 @@ namespace MemorySharpTests.Memory
         {
             Resources.Restart();
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             // Allocate a chunk of memory for testing purpose
@@ -129,7 +129,7 @@ namespace MemorySharpTests.Memory
         {
             Resources.Restart();
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             // Allocate a chunk of memory for testing purpose
@@ -157,7 +157,7 @@ namespace MemorySharpTests.Memory
         public void WriteAndReadInteger()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             // Allocate a chunk of memory for testing purpose

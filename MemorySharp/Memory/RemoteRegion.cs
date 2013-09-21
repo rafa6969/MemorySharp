@@ -24,7 +24,7 @@ namespace Binarysharp.MemoryManagement.Memory
         /// </summary>
         public MemoryBasicInformation Information
         {
-            get { return MemoryCore.Query(MemorySharp.Handle, BaseAddress); }
+            get { return MemorySharp.NativeDriver.MemoryCore.QueryInformationMemory(MemorySharp.Handle, BaseAddress); }
         }
         #endregion
         #region IsValid
@@ -109,7 +109,7 @@ namespace Binarysharp.MemoryManagement.Memory
         public void Release()
         {
             // Release the memory
-            MemoryCore.Free(MemorySharp.Handle, BaseAddress);
+            MemorySharp.NativeDriver.MemoryCore.FreeMemory(MemorySharp.Handle, BaseAddress);
             // Remove the pointer
             BaseAddress = IntPtr.Zero;
         }

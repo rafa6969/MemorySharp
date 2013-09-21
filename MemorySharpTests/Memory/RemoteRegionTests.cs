@@ -7,7 +7,6 @@
  * See the file LICENSE for more information.
 */
 
-using System.Threading;
 using Binarysharp.MemoryManagement.Native;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +22,7 @@ namespace MemorySharpTests.Memory
         public void ChangeProtection()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act - Assert
             Resources.EndTests(sharp);

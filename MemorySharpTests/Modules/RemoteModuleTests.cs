@@ -22,7 +22,7 @@ namespace MemorySharpTests.Modules
         public void FindFunctionInModuleAlreadyLoaded()
         {
             // Arrange
-            var memorysharp = Resources.MemorySharp;
+            var memorysharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = memorysharp.Modules["kernel32.dll"].FindFunction("Beep");
@@ -38,7 +38,7 @@ namespace MemorySharpTests.Modules
         public void FindFunctionCheckCachedFunctions()
         {
             // Arrange
-            var memorysharp = Resources.MemorySharp;
+            var memorysharp = Resources.MemorySharp32Bit;
 
             // Act
             var func1 = memorysharp.Modules["kernel32.dll"].FindFunction("Beep");
@@ -55,7 +55,7 @@ namespace MemorySharpTests.Modules
         public void FindFunctionInModuleNotLoaded()
         {
             // Arrange
-            var memorysharp = Resources.MemorySharp;
+            var memorysharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = memorysharp.Modules["SciLexer.dll"].FindFunction("Scintilla_DirectFunction");
@@ -71,8 +71,8 @@ namespace MemorySharpTests.Modules
         public void Equals()
         {
             // Arrange
-            var remote = Resources.MemorySharp;
-            var own = new MemorySharp(Resources.ProcessSelf);
+            var remote = Resources.MemorySharp32Bit;
+            var own = new MemorySharp(Resources.CurrentProcess);
 
             // Act
             var module1 = remote["kernel32"];

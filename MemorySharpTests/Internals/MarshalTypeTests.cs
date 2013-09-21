@@ -60,7 +60,7 @@ namespace MemorySharpTests.Internals
             var ptr = new IntPtr(32);
 
             // Act
-            var value = MarshalType<long>.PtrToObject(Resources.MemorySharp, ptr);
+            var value = MarshalType<long>.PtrToObject(Resources.MemorySharp32Bit, ptr);
 
             // Assert
             Assert.AreEqual(32, value);
@@ -74,7 +74,7 @@ namespace MemorySharpTests.Internals
         {
             // Arrange
             var point = Resources.CustomStruct;
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             using (var memory = sharp.Memory.Allocate(MarshalType<Point>.Size))

@@ -10,7 +10,6 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MemorySharpTests.Modules
@@ -25,13 +24,13 @@ namespace MemorySharpTests.Modules
         public void Modules()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var modules = sharp.Modules.RemoteModules.ToArray();
 
             // Assert
-            Assert.AreEqual(Resources.ProcessTest.Modules.Count, modules.Length, "The number of modules doesn't match.");
+            Assert.AreEqual(Resources.TestProcess32Bit.Modules.Count, modules.Length, "The number of modules doesn't match.");
         }
 
         /// <summary>
@@ -41,8 +40,8 @@ namespace MemorySharpTests.Modules
         public void MainModule()
         {
             // Arrange
-            var process = Resources.ProcessTest;
-            var memorySharp = Resources.MemorySharp;
+            var process = Resources.TestProcess32Bit;
+            var memorySharp = Resources.MemorySharp32Bit;
 
             // Act
             var mainModule = memorySharp.Modules.MainModule;
@@ -59,7 +58,7 @@ namespace MemorySharpTests.Modules
         {
             Resources.Restart();
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var dllPath = Resources.LibraryTest;
 
             // Act
@@ -68,7 +67,7 @@ namespace MemorySharpTests.Modules
                 // Assert
                 Assert.AreNotEqual(IntPtr.Zero, lib.BaseAddress, "The library couldn't be loaded properly.");
                 Assert.IsTrue(sharp.Modules.InjectedModules.Any(m => m == lib), "The collection of injected modules doesn't contain the module.");
-                Assert.IsTrue(Resources.ProcessTest.Modules.Cast<ProcessModule>().Any(m => m.FileName.ToLower() == dllPath.ToLower()), "Cannot find the module using native API.");
+                Assert.IsTrue(Resources.TestProcess32Bit.Modules.Cast<ProcessModule>().Any(m => m.FileName.ToLower() == dllPath.ToLower()), "Cannot find the module using native API.");
             }
 
             Resources.EndTests(sharp);

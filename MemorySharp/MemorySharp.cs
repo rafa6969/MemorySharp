@@ -39,14 +39,46 @@ namespace Binarysharp.MemoryManagement
         /// The factories embedded inside the library.
         /// </summary>
         protected List<IFactory> Factories;
+        /// <summary>
+        /// The Process Environment Block of the process.
+        /// </summary>
+        /// <remarks>The operation is deferred because it can be potentially slow.</remarks>
+        protected Lazy<ManagedPeb> InternalPeb;
         #endregion
 
         #region Properties
+        #region Architecture
+        /// <summary>
+        /// Gets the architecture of the process.
+        /// </summary>
+        public ProcessArchitectures Architecture
+        {
+            get { return ArchitectureHelper.GetArchitectureByProcess(Native); }
+        }
+        #endregion
         #region Assembly
         /// <summary>
         /// Factory for generating assembly code.
         /// </summary>
         public AssemblyFactory Assembly { get; protected set; }
+        #endregion
+        #region Is32BitProcess
+        /// <summary>
+        /// Gets whether the process is 32-bit.
+        /// </summary>
+        public bool Is32BitProcess
+        {
+            get { return Architecture == ProcessArchitectures.Ia32; }
+        }
+        #endregion
+        #region Is64BitProcess
+        /// <summary>
+        /// Gets whether the process is 64-bit.
+        /// </summary>
+        public bool Is64BitProcess
+        {
+            get { return Architecture == ProcessArchitectures.Amd64; }
+        }
         #endregion
         #region IsDebugged
         /// <summary>
@@ -91,11 +123,17 @@ namespace Binarysharp.MemoryManagement
         /// </summary>
         public Process Native { get; private set; }
         #endregion
+        #region NativeDriver
+        /// <summary>
+        /// Gets the native driver to interact with the API system/architecture dependant.
+        /// </summary>
+        public NativeDriverBase NativeDriver { get; protected set; }
+        #endregion
         #region Peb
         /// <summary>
         /// The Process Environment Block of the process.
         /// </summary>
-        public ManagedPeb Peb { get; private set; }
+        public ManagedPeb Peb { get { return InternalPeb.Value; } }
         #endregion
         #region Pid
         /// <summary>
@@ -150,10 +188,21 @@ namespace Binarysharp.MemoryManagement
         {
             // Save the reference of the process
             Native = process;
+            // Use the correct API depending on the architecture of the opened process
+            switch (Architecture)
+            {
+                case ProcessArchitectures.Amd64:
+                    NativeDriver = new NativeDriver64();
+                    // TODO: PEB 64 ?
+                    break;
+                default:
+                    NativeDriver = new NativeDriver32();
+                    // Initialize the PEB
+                    InternalPeb = new Lazy<ManagedPeb>(() => new ManagedPeb(this));
+                    break;
+            }
             // Open the process with all rights
-            Handle = MemoryCore.OpenProcess(ProcessAccessFlags.AllAccess, process.Id);
-            // Initialize the PEB
-            Peb = new ManagedPeb(this, ManagedPeb.FindPeb(Handle));
+            Handle = NativeDriver.MemoryCore.OpenProcess(ProcessAccessFlags.AllAccess, process.Id);
             // Create instances of the factories
             Factories = new List<IFactory>();
             Factories.AddRange(
@@ -336,7 +385,7 @@ namespace Binarysharp.MemoryManagement
         /// <returns>The array of bytes.</returns>
         protected byte[] ReadBytes(IntPtr address, int count, bool isRelative = true)
         {
-            return MemoryCore.ReadBytes(Handle, isRelative ? MakeAbsolute(address) : address, count);
+            return NativeDriver.MemoryCore.ReadBytes(Handle, isRelative ? MakeAbsolute(address) : address, count);
         }
         #endregion
         #region ReadString
@@ -455,7 +504,7 @@ namespace Binarysharp.MemoryManagement
             using (new MemoryProtection(this, isRelative ? MakeAbsolute(address) : address, MarshalType<byte>.Size * byteArray.Length))
             {
                 // Write the byte array
-                MemoryCore.WriteBytes(Handle, isRelative ? MakeAbsolute(address) : address, byteArray);
+                NativeDriver.MemoryCore.WriteBytes(Handle, isRelative ? MakeAbsolute(address) : address, byteArray);
 
             }
         }

@@ -23,7 +23,7 @@ namespace MemorySharpTests.Helpers
         public void TopLevelWindows()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.TopLevelWindows.FirstOrDefault(windowHandle => windowHandle == process.MainWindowHandle);
@@ -39,7 +39,7 @@ namespace MemorySharpTests.Helpers
         public void Windows()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.Windows.FirstOrDefault(windowHandle => windowHandle == process.MainWindowHandle);
@@ -55,7 +55,7 @@ namespace MemorySharpTests.Helpers
         public void FromProcessId()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromProcessId(process.Id);
@@ -71,7 +71,7 @@ namespace MemorySharpTests.Helpers
         public void FromProcessName()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromProcessName(process.ProcessName).First();
@@ -87,7 +87,7 @@ namespace MemorySharpTests.Helpers
         public void FromWindowClassName()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromWindowClassName("Notepad++").First();
@@ -103,7 +103,7 @@ namespace MemorySharpTests.Helpers
         public void FromWindowHandle()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromWindowHandle(process.MainWindowHandle);
@@ -120,7 +120,7 @@ namespace MemorySharpTests.Helpers
         {
             // Arrange
             Resources.Restart();
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromWindowTitle("new  1 - Notepad++").First();
@@ -136,7 +136,7 @@ namespace MemorySharpTests.Helpers
         public void FromWindowTitleContains()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             var ret = ApplicationFinder.FromWindowTitleContains("Notepad++").First();

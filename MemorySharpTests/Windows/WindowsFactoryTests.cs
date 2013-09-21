@@ -7,7 +7,6 @@
  * See the file LICENSE for more information.
 */
 
-using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +22,7 @@ namespace MemorySharpTests.Windows
         public void ChildWindows()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var windows = sharp.Windows.ChildWindows;
@@ -39,7 +38,7 @@ namespace MemorySharpTests.Windows
         public void Windows()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var windows = sharp.Windows.RemoteWindows;
@@ -55,7 +54,7 @@ namespace MemorySharpTests.Windows
         public void GetWindowByClassName()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var windows = sharp.Windows.GetWindowsByClassName("Scintilla");
@@ -71,7 +70,7 @@ namespace MemorySharpTests.Windows
         public void GetWindowByTitleContains()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var windows = sharp.Windows.GetWindowsByTitleContains("Notepad++");

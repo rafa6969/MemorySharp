@@ -22,7 +22,7 @@ namespace MemorySharpTests.Assembly
         public void Inject()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             using (var memory = sharp.Memory.Allocate(1))
@@ -50,7 +50,7 @@ namespace MemorySharpTests.Assembly
         public void TransactionInject()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             using (var memory = sharp.Memory.Allocate(1))
@@ -76,7 +76,7 @@ namespace MemorySharpTests.Assembly
         public void InjectAndExecute()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var asm = new[]
                 {
                     "use32",
@@ -99,7 +99,7 @@ namespace MemorySharpTests.Assembly
         public void InjectAndExecuteWithTransaction()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             AssemblyTransaction t;
 
             // Act
@@ -122,7 +122,7 @@ namespace MemorySharpTests.Assembly
         public void Execute()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             using (var memory = sharp.Memory.Allocate(1))

@@ -27,7 +27,7 @@ namespace MemorySharpTests.Windows
         public void EnumTopLevelWindowsCheckPrecence()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             var handles = WindowCore.EnumTopLevelWindows().ToArray();
@@ -81,7 +81,7 @@ namespace MemorySharpTests.Windows
         public void EnumChildWindows_CheckIfScintillaPresent()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             var handles = WindowCore.EnumChildWindows(handle).ToArray();
@@ -98,7 +98,7 @@ namespace MemorySharpTests.Windows
         public void SetGetForegroundWindow()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             try
@@ -121,7 +121,7 @@ namespace MemorySharpTests.Windows
         public void PostMessageCloseWindow()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             WindowCore.PostMessage(process.MainWindowHandle, WindowsMessages.Close, UIntPtr.Zero, UIntPtr.Zero);
@@ -139,7 +139,7 @@ namespace MemorySharpTests.Windows
         public void SendMessageCloseWindow()
         {
             // Arrange
-            var process = Resources.ProcessTest;
+            var process = Resources.TestProcess32Bit;
 
             // Act
             WindowCore.SendMessage(process.MainWindowHandle, WindowsMessages.Close, UIntPtr.Zero, IntPtr.Zero);
@@ -157,13 +157,13 @@ namespace MemorySharpTests.Windows
         public void GetWindowThreadId()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             var threadId = WindowCore.GetWindowThreadId(handle);
 
             // Assert
-            Assert.AreEqual(Resources.ProcessTest.Threads[0].Id, threadId, "Thread id are not equal."); // This is the case for Notepad++
+            Assert.AreEqual(Resources.TestProcess32Bit.Threads[0].Id, threadId, "Thread id are not equal."); // This is the case for Notepad++
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace MemorySharpTests.Windows
         public void SetGetWindowText()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
             const string value = "I love cookies";
 
             // Act
@@ -192,7 +192,7 @@ namespace MemorySharpTests.Windows
         public void GetClassName()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             var className = WindowCore.GetClassName(handle);
@@ -208,7 +208,7 @@ namespace MemorySharpTests.Windows
         public void SetGetWindowPlacement()
         {
             // Arrange
-            var handle = Resources.ProcessTest.MainWindowHandle;
+            var handle = Resources.TestProcess32Bit.MainWindowHandle;
 
             // Act
             WindowCore.SetWindowPlacement(handle, 400, 400, 400, 400);

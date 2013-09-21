@@ -54,11 +54,12 @@
     <Compile Include="Helpers\ApplicationFinderTests.cs" />
     <Compile Include="Helpers\HandleManipulatorTests.cs" />
     <Compile Include="Helpers\SingletonTests.cs" />
+    <Compile Include="Helpers\ArchitectureHelperTests.cs" />
     <Compile Include="Internals\MarshalTypeTests.cs" />
     <Compile Include="Internals\MarshalValueTests.cs" />
     <Compile Include="Memory\RemotePointerTests.cs" />
     <Compile Include="Memory\LocalUnmanagedMemoryTests.cs" />
-    <Compile Include="Memory\MemoryCoreTests.cs" />
+    <Compile Include="Memory\MemoryCore32Tests.cs" />
     <Compile Include="Memory\RemoteRegionTests.cs" />
     <Compile Include="Modules\ModuleCoreTests.cs" />
     <Compile Include="Modules\ModuleFactoryTests.cs" />

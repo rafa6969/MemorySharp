@@ -22,7 +22,7 @@ namespace MemorySharpTests.Internals
         public void MarshalInteger()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const int value = 1024;
 
             // Act
@@ -42,7 +42,7 @@ namespace MemorySharpTests.Internals
         public void MarshalFloat()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const float value = 1024f;
 
             // Act
@@ -62,7 +62,7 @@ namespace MemorySharpTests.Internals
         public void MarshalBoolean()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const bool value = true;
 
             // Act
@@ -82,7 +82,7 @@ namespace MemorySharpTests.Internals
         public void MarshalChar()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const char value = 'A';
 
             // Act
@@ -102,7 +102,7 @@ namespace MemorySharpTests.Internals
         public void MarshalByte()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const byte value = 0x90;
 
             // Act
@@ -122,7 +122,7 @@ namespace MemorySharpTests.Internals
         public void Marshal_CustomStruct()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var value = Resources.CustomStruct;
 
             // Act
@@ -145,7 +145,7 @@ namespace MemorySharpTests.Internals
         public void MarshalString()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const string path = "If you read that, you're *really* like unit tests.";
 
             // Act
@@ -165,7 +165,7 @@ namespace MemorySharpTests.Internals
         public void MarshalShort()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const short value = 1024;
 
             // Act

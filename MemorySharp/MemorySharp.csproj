@@ -72,6 +72,7 @@
     <Compile Include="Assembly\CallingConvention\ICallingConvention.cs" />
     <Compile Include="Assembly\CallingConvention\Enumerations.cs" />
     <Compile Include="Helpers\ApplicationFinder.cs" />
+    <Compile Include="Helpers\ArchitectureHelper.cs" />
     <Compile Include="Helpers\HandleManipulator.cs" />
     <Compile Include="Helpers\Randomizer.cs" />
     <Compile Include="Helpers\SerializationHelper.cs" />
@@ -85,8 +86,10 @@
     <Compile Include="Internals\MarshalType.cs" />
     <Compile Include="Internals\MarshalValue.cs" />
     <Compile Include="MemorySharp.cs" />
+    <Compile Include="Memory\IMemoryCore.cs" />
+    <Compile Include="Memory\MemoryCore64.cs" />
     <Compile Include="Memory\RemoteAllocation.cs" />
-    <Compile Include="Memory\MemoryCore.cs" />
+    <Compile Include="Memory\MemoryCore32.cs" />
     <Compile Include="Memory\LocalUnmanagedMemory.cs" />
     <Compile Include="Memory\MemoryFactory.cs" />
     <Compile Include="Memory\MemoryProtection.cs" />
@@ -100,6 +103,9 @@
     <Compile Include="Modules\RemoteFunction.cs" />
     <Compile Include="Modules\RemoteModule.cs" />
     <Compile Include="Native\Enumerations.cs" />
+    <Compile Include="Native\NativeDriver32.cs" />
+    <Compile Include="Native\NativeDriver64.cs" />
+    <Compile Include="Native\NativeDriverBase.cs" />
     <Compile Include="Native\SafeMemoryHandle.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Native\Structures.cs" />

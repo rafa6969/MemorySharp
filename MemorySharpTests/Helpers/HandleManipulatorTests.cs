@@ -22,13 +22,13 @@ namespace MemorySharpTests.Helpers
         public void HandleToProcess()
         {
             // Arrange
-            var processHandle = Resources.MemorySharp.Handle;
+            var processHandle = Resources.MemorySharp32Bit.Handle;
 
             // Act
             var ret = HandleManipulator.HandleToProcess(processHandle);
 
             // Assert
-            Assert.AreEqual(Resources.ProcessTest.Id, ret.Id, "The both process id are not equal.");
+            Assert.AreEqual(Resources.TestProcess32Bit.Id, ret.Id, "The both process id are not equal.");
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace MemorySharpTests.Helpers
         public void HandleToProcessId()
         {
             // Arrange
-            var processHandle = Resources.MemorySharp.Handle;
+            var processHandle = Resources.MemorySharp32Bit.Handle;
 
             // Act
             var ret = HandleManipulator.HandleToProcessId(processHandle);
 
             // Assert
-            Assert.AreEqual(Resources.ProcessTest.Id, ret, "The both process id are not equal.");
+            Assert.AreEqual(Resources.TestProcess32Bit.Id, ret, "The both process id are not equal.");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace MemorySharpTests.Helpers
         public void HandleToThread()
         {
             // Arrange
-            var threadHandle = Resources.MemorySharp.Threads.MainThread;
+            var threadHandle = Resources.MemorySharp32Bit.Threads.MainThread;
 
             // Act
             var ret = HandleManipulator.HandleToThread(threadHandle.Handle);
@@ -70,7 +70,7 @@ namespace MemorySharpTests.Helpers
         public void HandleToThreadId()
         {
             // Arrange
-            var threadHandle = Resources.MemorySharp.Threads.MainThread;
+            var threadHandle = Resources.MemorySharp32Bit.Threads.MainThread;
 
             // Act
             var ret = HandleManipulator.HandleToThreadId(threadHandle.Handle);

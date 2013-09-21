@@ -23,7 +23,7 @@ namespace MemorySharpTests.Threading
         public void CreateThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var thread = sharp.Threads.Create(new IntPtr(1), false);
@@ -39,8 +39,8 @@ namespace MemorySharpTests.Threading
         public void GetThreadById()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
-            var mainThread = Resources.ProcessTest.Threads[0];
+            var sharp = Resources.MemorySharp32Bit;
+            var mainThread = Resources.TestProcess32Bit.Threads[0];
 
             // Act
             var mainThread2 = sharp.Threads.GetThreadById(mainThread.Id);
@@ -56,14 +56,14 @@ namespace MemorySharpTests.Threading
         public void RemoteThreadsAny()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = sharp.Threads.RemoteThreads.ToArray();
 
             // Assert
             Assert.IsTrue(ret.Any(), "Cannot gather remote threads.");
-            Assert.AreEqual(Resources.ProcessTest.Threads.Count, ret.Count(), "The number of thread does not match.");
+            Assert.AreEqual(Resources.TestProcess32Bit.Threads.Count, ret.Count(), "The number of thread does not match.");
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MemorySharpTests.Threading
         public void SuspenAllResumeAll()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act - Assert
             sharp.Threads.SuspendAll();

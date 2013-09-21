@@ -24,6 +24,8 @@ namespace MemorySharpTests.Threading
     [TestClass]
     public class ThreadCoreTests
     {
+        protected IMemoryCore MemoryCore = new MemoryCore32();
+
         /// <summary>
         /// Suspends and restores the main thread.
         /// </summary>
@@ -31,7 +33,7 @@ namespace MemorySharpTests.Threading
         public void SuspendRestore()
         {
             // Arrange
-            var threadHandle = ThreadCore.OpenThread(ThreadAccessFlags.SuspendResume, Resources.ProcessTest.Threads[0].Id);
+            var threadHandle = ThreadCore.OpenThread(ThreadAccessFlags.SuspendResume, Resources.TestProcess32Bit.Threads[0].Id);
 
             // Act
             try
@@ -56,8 +58,8 @@ namespace MemorySharpTests.Threading
         public void Terminate()
         {
             // Arrange
-            var handle = ThreadCore.OpenThread(ThreadAccessFlags.Terminate, Resources.ProcessTest.Threads[0].Id);
-            var threadId = Resources.ProcessTest.Threads[0].Id;
+            var handle = ThreadCore.OpenThread(ThreadAccessFlags.Terminate, Resources.TestProcess32Bit.Threads[0].Id);
+            var threadId = Resources.TestProcess32Bit.Threads[0].Id;
 
             // Act
             try
@@ -69,8 +71,8 @@ namespace MemorySharpTests.Threading
             {
                 Assert.Fail(ex.Message);
             }
-            Resources.ProcessTest.Refresh();
-            Assert.AreNotEqual(threadId, Resources.ProcessTest.Threads[0].Id, "The main thread was not properly killed.");
+            Resources.TestProcess32Bit.Refresh();
+            Assert.AreNotEqual(threadId, Resources.TestProcess32Bit.Threads[0].Id, "The main thread was not properly killed.");
             Resources.Restart();
         }
 
@@ -81,7 +83,7 @@ namespace MemorySharpTests.Threading
         public void CreateRemoteThread()
         {
             // Arrange
-            var handle = MemoryCore.OpenProcess(ProcessAccessFlags.AllAccess, Resources.ProcessTest.Id);
+            var handle = MemoryCore.OpenProcess(ProcessAccessFlags.AllAccess, Resources.TestProcess32Bit.Id);
 
             // Act
             var thread = ThreadCore.CreateRemoteThread(handle, new IntPtr(1), IntPtr.Zero ,ThreadCreationFlags.Suspended);
@@ -89,7 +91,7 @@ namespace MemorySharpTests.Threading
 
             // Assert
             Assert.IsFalse(thread.IsInvalid);
-            Assert.IsTrue(Resources.ProcessTest.Threads.Cast<ProcessThread>().Any(t => t.Id == threadId));
+            Assert.IsTrue(Resources.TestProcess32Bit.Threads.Cast<ProcessThread>().Any(t => t.Id == threadId));
         }
 
         /// <summary>
@@ -99,7 +101,7 @@ namespace MemorySharpTests.Threading
         public void GetSetThreadContextSuspendResume()
         {
             // Arrange
-            var handle = ThreadCore.OpenThread(ThreadAccessFlags.AllAccess, Resources.ProcessTest.Threads[0].Id);
+            var handle = ThreadCore.OpenThread(ThreadAccessFlags.AllAccess, Resources.TestProcess32Bit.Threads[0].Id);
 
             // Act
             try
@@ -137,7 +139,7 @@ namespace MemorySharpTests.Threading
         public void WaitForSingleObject()
         {
             // Arrange
-            var handle = ThreadCore.OpenThread(ThreadAccessFlags.Synchronize, Resources.ProcessTest.Threads[0].Id);
+            var handle = ThreadCore.OpenThread(ThreadAccessFlags.Synchronize, Resources.TestProcess32Bit.Threads[0].Id);
 
             // Act
             var task = new Task<WaitValues>(() => ThreadCore.WaitForSingleObject(handle));
@@ -155,7 +157,7 @@ namespace MemorySharpTests.Threading
         public void GetExitCodeThread()
         {
             // Arrange
-            var handle = ThreadCore.OpenThread(ThreadAccessFlags.QueryInformation | ThreadAccessFlags.Terminate, Resources.ProcessTest.Threads[0].Id);
+            var handle = ThreadCore.OpenThread(ThreadAccessFlags.QueryInformation | ThreadAccessFlags.Terminate, Resources.TestProcess32Bit.Threads[0].Id);
 
             // Act
             var exitCodeBefore = ThreadCore.GetExitCodeThread(handle);

@@ -32,13 +32,13 @@ namespace MemorySharpTests.Modules
 
             // Assert
             Assert.AreEqual(module.FileName, dllPath, "The module cannot be loaded correctly.");
-            Assert.IsTrue(Resources.ProcessSelf.Modules.Cast<ProcessModule>().Any(m => m.FileName == dllPath), "The module cannot be found.");
+            Assert.IsTrue(Resources.CurrentProcess.Modules.Cast<ProcessModule>().Any(m => m.FileName == dllPath), "The module cannot be found.");
 
             // Act 2
             ModuleCore.FreeLibrary(module);
 
             // Assert 2
-            Assert.IsFalse(Resources.ProcessSelf.Modules.Cast<ProcessModule>().Any(m => m.FileName == dllPath), "The module cannot be freed.");
+            Assert.IsFalse(Resources.CurrentProcess.Modules.Cast<ProcessModule>().Any(m => m.FileName == dllPath), "The module cannot be freed.");
         }
 
         /// <summary>

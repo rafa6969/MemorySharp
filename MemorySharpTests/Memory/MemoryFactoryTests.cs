@@ -25,7 +25,7 @@ namespace MemorySharpTests.Memory
         public void Regions_GetAllMemoryRegions()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = sharp.Memory.Regions.ToArray();
@@ -36,14 +36,14 @@ namespace MemorySharpTests.Memory
         }
 
         /// <summary>
-        /// Allocates 1MB of memory in the remote process.
+        /// Allocates 10KB of memory in the remote process.
         /// </summary>
         [TestMethod]
-        public void Allocate_Allocate1MBMemoryRegion()
+        public void Allocate_Allocate10KBMemoryRegion()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
-            const int size = 1024*1024;
+            var sharp = Resources.MemorySharp32Bit;
+            const int size = 1024 * 10;
 
             // Act
             var allocated = sharp.Memory.Allocate(size);
@@ -75,7 +75,7 @@ namespace MemorySharpTests.Memory
         public void Allocate_WithUsingStatement()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             RemoteAllocation remoteAllocation;
 
             // Act

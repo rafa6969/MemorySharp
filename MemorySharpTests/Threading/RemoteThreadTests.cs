@@ -26,7 +26,7 @@ namespace MemorySharpTests.Threading
         public void SuspendResumeMainThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var thread = sharp.Threads.MainThread;
 
             // Act - Assert
@@ -48,7 +48,7 @@ namespace MemorySharpTests.Threading
         public void TerminateMainThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var thread = sharp.Threads.MainThread;
 
             // Act - Assert
@@ -67,7 +67,7 @@ namespace MemorySharpTests.Threading
         public void GetContextMainThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var context = sharp.Threads.MainThread.Context;
@@ -83,7 +83,7 @@ namespace MemorySharpTests.Threading
         public void GetRealSegmentAddress_GetAllSegmentsMainThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var thread = sharp.Threads.MainThread;
@@ -100,7 +100,7 @@ namespace MemorySharpTests.Threading
         public void TebTlsSlots_CopyTlsFromAnotherThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var t1 = sharp.Threads.MainThread;
             var t2 = sharp.Threads.RemoteThreads.Last();
             var values = new[] { new IntPtr(0x1123344), new IntPtr(0x55667788) };
@@ -125,8 +125,8 @@ namespace MemorySharpTests.Threading
         public void SuspendResumeSetContextEip()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
-            var sharp2 = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
+            var sharp2 = Resources.MemorySharp32Bit;
             var thread = sharp.Threads.MainThread;
             const uint value = 0x666;
 
@@ -155,7 +155,7 @@ namespace MemorySharpTests.Threading
         public void Join3SecMainThread()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = sharp.Threads.MainThread.Join(TimeSpan.FromSeconds(3));

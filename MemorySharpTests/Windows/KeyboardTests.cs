@@ -26,7 +26,7 @@ namespace MemorySharpTests.Windows
         public void ArrowBottom3Sec()
         {
             // Arrange
-            var scintilla = Resources.MemorySharp.Windows.GetWindowsByClassName("Scintilla").First();
+            var scintilla = Resources.MemorySharp32Bit.Windows.GetWindowsByClassName("Scintilla").First();
 
             // Act
             scintilla.Keyboard.Press(Keys.Down, TimeSpan.FromMilliseconds(20));
@@ -45,7 +45,7 @@ namespace MemorySharpTests.Windows
         public void PostKey_MainWindow()
         {
             // Arrange
-            var window = Resources.MemorySharp.Windows.MainWindow;
+            var window = Resources.MemorySharp32Bit.Windows.MainWindow;
 
             // Act
             window.Keyboard.PressRelease(Keys.F1);
@@ -62,7 +62,7 @@ namespace MemorySharpTests.Windows
         public void WriteText()
         {
             // Arrange
-            var scintilla = Resources.MemorySharp.Windows.GetWindowsByClassName("Scintilla").First();
+            var scintilla = Resources.MemorySharp32Bit.Windows.GetWindowsByClassName("Scintilla").First();
 
             // Act
             scintilla.Keyboard.Write("<B1n@rYsH-arP^^$$#>");

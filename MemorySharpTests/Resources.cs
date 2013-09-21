@@ -25,9 +25,9 @@ namespace MemorySharpTests
         /// </summary>
         static Resources()
         {
-            if(ProcessTest == null)
+            if(TestProcess32Bit == null)
                 throw new Exception("You probably forgot to launch the test process.");
-            _path = ProcessTest.MainModule.FileName;
+            _path = TestProcess32Bit.MainModule.FileName;
         }
 
         /// <summary>
@@ -55,32 +55,54 @@ namespace MemorySharpTests
         }
 
         /// <summary>
-        /// A new instance of the <see cref="MemorySharp"/> class.
+        /// A new instance of the <see cref="MemorySharp"/> class (32-bit).
         /// </summary>
-        internal static MemorySharp MemorySharp
+        internal static MemorySharp MemorySharp32Bit
         {
             get
             {
-                return new MemorySharp(ProcessTest);
+                return new MemorySharp(TestProcess32Bit);
             }
         }
 
         /// <summary>
-        /// The process itself.
+        /// A new instance of the <see cref="MemorySharp"/> class (64-bit).
         /// </summary>
-        internal static Process ProcessSelf
+        internal static MemorySharp MemorySharp64Bit
+        {
+            get
+            {
+                return new MemorySharp(TestProcess64Bit);
+            }
+        }
+
+        /// <summary>
+        /// The current process.
+        /// </summary>
+        internal static Process CurrentProcess
         {
             get { return Process.GetCurrentProcess(); }
         }
 
         /// <summary>
-        /// The process used for tests.
+        /// The process used for tests (32-bit).
         /// </summary>
-        internal static Process ProcessTest
+        internal static Process TestProcess32Bit
         {
             get
             {
                 return Process.GetProcessesByName("notepad++").FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// The process used for tests (64-bit).
+        /// </summary>
+        internal static Process TestProcess64Bit
+        {
+            get
+            {
+                return Process.GetProcessesByName("calc").FirstOrDefault();
             }
         }
 
@@ -99,11 +121,20 @@ namespace MemorySharpTests
         internal static void Restart()
         {
             // Kill the process
-            if (ProcessTest != null)
-                ProcessTest.Kill();
+            if (TestProcess32Bit != null)
+                TestProcess32Bit.Kill();
             // Start it
             Process.Start(_path);
             Thread.Sleep(2000);
+        }
+
+        /// <summary>
+        /// Interrupts the current test if the operating system is not running under an 64-bit operating system.
+        /// </summary>
+        internal static void InterruptWhenNot64BitOs()
+        {
+            if (!Environment.Is64BitOperatingSystem)
+                Assert.Inconclusive("The operating system is not 64-bit.");
         }
     }
 

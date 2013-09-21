@@ -23,7 +23,7 @@ namespace MemorySharpTests
         public void GetAbsolute()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var address = sharp.Modules.MainModule.BaseAddress;
             var offset = new IntPtr(0x400);
 
@@ -41,7 +41,7 @@ namespace MemorySharpTests
         public void GetRelative()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var offset = new IntPtr(0x400);
             var address = new IntPtr(sharp.Modules.MainModule.BaseAddress.ToInt64() + offset.ToInt64());
 
@@ -59,7 +59,7 @@ namespace MemorySharpTests
         public void WriteReadBytes()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var value = new byte[] {0x90,0x90,0x90};
 
             // Act
@@ -78,7 +78,7 @@ namespace MemorySharpTests
         public void WriteReadIntegers()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             var value = new[] { 0x90, 0x90, 0x90 };
 
             // Act
@@ -97,7 +97,7 @@ namespace MemorySharpTests
         public void WriteReadString()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
             const string value = "I love cookies";
 
             // Act
@@ -116,7 +116,7 @@ namespace MemorySharpTests
         public void IsRunning()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act - Assert
             Assert.IsTrue(sharp.IsRunning, "The process must be running.");
@@ -134,7 +134,7 @@ namespace MemorySharpTests
         public void CheckIfNoDebuggerIsAttached()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var ret = sharp.IsDebugged;

@@ -7,7 +7,6 @@
  * See the file LICENSE for more information.
 */
 
-using System;
 using System.Linq;
 using System.Threading;
 using Binarysharp.MemoryManagement.Native;
@@ -25,7 +24,7 @@ namespace MemorySharpTests.Windows
         public void ChildrenAndClassName()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             var window = sharp.Windows.MainWindow.Children.FirstOrDefault(w => w.ClassName == "Scintilla");
@@ -41,7 +40,7 @@ namespace MemorySharpTests.Windows
         public void GetSetHeightWidthPosition()
         {
             // Arrange
-            var window = Resources.MemorySharp.Windows.MainWindow;
+            var window = Resources.MemorySharp32Bit.Windows.MainWindow;
             const int size = 200;
 
             // Act
@@ -68,7 +67,7 @@ namespace MemorySharpTests.Windows
         public void ActivateAndIsActivated()
         {
             // Arrange
-            var window = Resources.MemorySharp.Windows.MainWindow;
+            var window = Resources.MemorySharp32Bit.Windows.MainWindow;
 
             // Act
             window.Activate();
@@ -86,7 +85,7 @@ namespace MemorySharpTests.Windows
         public void GetSetState()
         {
             // Arrange
-            var window = Resources.MemorySharp.Windows.MainWindow;
+            var window = Resources.MemorySharp32Bit.Windows.MainWindow;
 
             // Act
             window.State = WindowStates.ShowMinimized;
@@ -103,7 +102,7 @@ namespace MemorySharpTests.Windows
         public void Title()
         {
             // Arrange
-            var window = Resources.MemorySharp.Windows.MainWindow;
+            var window = Resources.MemorySharp32Bit.Windows.MainWindow;
             const string title = "I love cookies";
 
             // Act
@@ -122,7 +121,7 @@ namespace MemorySharpTests.Windows
         public void Close()
         {
             // Arrange
-            var sharp = Resources.MemorySharp;
+            var sharp = Resources.MemorySharp32Bit;
 
             // Act
             sharp.Windows.MainWindow.Close();

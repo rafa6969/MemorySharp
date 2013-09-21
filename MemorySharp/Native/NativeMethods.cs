@@ -357,6 +357,28 @@ namespace Binarysharp.MemoryManagement.Native
         public static extern bool FlashWindowEx(ref FlashInfo pwfi);
         #endregion
 
+        #region IsWow64Process
+        /// <summary>
+        /// Determines whether the specified process is running under WOW64.
+        /// WOW64 is the x86 emulator that allows 32-bit Windows-based applications to run seamlessly on 64-bit Windows. 
+        /// </summary>
+        /// <param name="process">
+        /// A handle to the process.
+        /// The handle must have the <see cref="ProcessAccessFlags.QueryInformation"/> or <see cref="ProcessAccessFlags.QueryLimitedInformation"/> access right.
+        /// </param>
+        /// <param name="wow64Process">
+        /// A pointer to a value that is set to TRUE if the process is running under WOW64.
+        /// If the process is running under 32-bit Windows, the value is set to FALSE. 
+        /// If the process is a 64-bit application running under 64-bit Windows, the value is also set to FALSE.</param>
+        /// <returns>
+        /// If the function succeeds, the return value is nonzero. 
+        /// If the function fails, the return value is zero. To get extended error information, call <see cref="Marshal.GetLastWin32Error"/>.
+        /// </returns>
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWow64Process(IntPtr process, [Out, MarshalAs(UnmanagedType.Bool)] out bool wow64Process);
+        #endregion
+
         #region LoadLibrary
         /// <summary>
         /// Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.

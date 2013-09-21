@@ -77,7 +77,7 @@ namespace Binarysharp.MemoryManagement.Memory
             MustBeDisposed = mustBeDisposed;
 
             // Change the memory protection
-            OldProtection = MemoryCore.ChangeProtection(_memorySharp.Handle, baseAddress, size, protection);
+            OldProtection = _memorySharp.NativeDriver.MemoryCore.ChangeMemoryProtection(_memorySharp.Handle, baseAddress, size, protection);
         }
         /// <summary>
         /// Frees resources and perform other cleanup operations before it is reclaimed by garbage collection.
@@ -97,7 +97,7 @@ namespace Binarysharp.MemoryManagement.Memory
         public virtual void Dispose()
         {
             // Restore the memory protection
-            MemoryCore.ChangeProtection(_memorySharp.Handle, BaseAddress, Size, OldProtection);
+            _memorySharp.NativeDriver.MemoryCore.ChangeMemoryProtection(_memorySharp.Handle, BaseAddress, Size, OldProtection);
             // Avoid the finalizer 
             GC.SuppressFinalize(this);
         }
