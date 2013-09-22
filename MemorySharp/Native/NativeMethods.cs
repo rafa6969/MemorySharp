@@ -18,6 +18,7 @@ namespace Binarysharp.MemoryManagement.Native
     /// </summary>
     public static class NativeMethods
     {
+        #region PInvoke
         #region CloseHandle
         /// <summary>
         /// Closes an open object handle.
@@ -125,6 +126,29 @@ namespace Binarysharp.MemoryManagement.Native
         /// </returns>
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetExitCodeThread(SafeMemoryHandle hThread, out IntPtr lpExitCode);
+        #endregion
+
+        #region GetModuleHandle
+        /// <summary>
+        /// Retrieves a module handle for the specified module. The module must have been loaded by the calling process.
+        /// </summary>
+        /// <param name="moduleName">
+        /// <para>
+        /// The name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.
+        /// The file name string can include a trailing point character (.) to indicate that the module name has no extension.
+        /// The string does not have to specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/). 
+        /// The name is compared (case independently) to the names of modules currently mapped into the address space of the calling process. 
+        /// </para>
+        /// <para>
+        /// If this parameter is NULL, GetModuleHandle returns a handle to the file used to create the calling process (.exe file).
+        /// </para>
+        /// </param>
+        /// <returns>
+        /// If the function succeeds, the return value is a handle to the specified module.
+        /// If the function fails, the return value is NULL. To get extended error information, call <see cref="Marshal.GetLastWin32Error"/>.
+        /// </returns>
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr GetModuleHandle(string moduleName);
         #endregion
 
         #region GetProcAddress
@@ -885,6 +909,28 @@ namespace Binarysharp.MemoryManagement.Native
         [DllImport("kernel32.dll",SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool WriteProcessMemory(SafeMemoryHandle hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out IntPtr lpNumberOfBytesWritten);
+        #endregion
+        #endregion
+
+        #region Extensions
+        #region DoesWin32MethodExist
+        /// <summary>
+        /// Determines whether the specified function exists in the specified module.
+        /// </summary>
+        /// <param name="moduleName">The name of the module.</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <returns>The return value indicates whether the function exists in the module.</returns>
+        /// <remarks>This is an internal function from Microsoft.</remarks>
+        internal static bool DoesWin32MethodExist(string moduleName, string functionName)
+        {
+            var moduleHandle = GetModuleHandle(moduleName);
+            if (moduleHandle == IntPtr.Zero)
+            {
+                return false;
+            }
+            return (GetProcAddress(moduleHandle, functionName) != IntPtr.Zero);
+        }
+        #endregion
         #endregion
     }
 

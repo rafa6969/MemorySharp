@@ -71,14 +71,18 @@ namespace Binarysharp.MemoryManagement.Helpers
         /// <returns>A value indicating whether the process is running under WOW64.</returns>
         public static bool IsWoW64Process(Process process)
         {
+            // Check the library kernel32 contains the function
+            if (!NativeMethods.DoesWin32MethodExist("kernel32.dll", "IsWow64Process"))
+                return false;
+
             // Create a var to store the result
             bool x86Emulator;
             // Determine if the process is running under the x86 emulator
             if (!NativeMethods.IsWow64Process(process.Handle, out x86Emulator))
                 throw new Win32Exception(string.Format("Couldn't determine if the process '{0}' is using WOW64.", process.ProcessName));
+
             // Return the result
             return x86Emulator;
-
         }
         #endregion
         #region GetProcessArchitecture
