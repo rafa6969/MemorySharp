@@ -284,7 +284,7 @@ namespace Binarysharp.MemoryManagement.Native
         /// <summary>
         /// The exit status.
         /// </summary>
-        public uint ExitStatus;
+        public IntPtr ExitStatus;
         /// <summary>
         /// The base address of Process Environment Block.
         /// </summary>
